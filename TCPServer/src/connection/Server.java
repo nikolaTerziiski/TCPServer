@@ -11,22 +11,17 @@ public class Server {
 
     public static void main(String[] args) {
 
-       // ExecutorService executor = Executors.newFixedThreadPool(MAX_EXECUTOR_THREADS);
         List<ClientHandler> clients = new ArrayList<>();
 
-        try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT);) {
+        try {
 
+            ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
             System.out.println("Server started and listening for connect requests");
 
             Socket clientSocket;
-
             while (true) {
 
-                // Calling accept() blocks and waits for connection request by a client
-                // When a request comes, accept() returns a socket to communicate with this
-                // client
                 clientSocket = serverSocket.accept();
-
                 System.out.println("Accepted connection request from client " + clientSocket.getInetAddress());
 
                 // We want each client to be processed in a separate thread

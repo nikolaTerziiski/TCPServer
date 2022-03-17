@@ -13,10 +13,9 @@ public class Client {
     public static void main(String[] args) {
 
         try {
-
-            Socket socket = new Socket("192.168.1.102", SERVER_PORT);
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            Socket clientSocket = new Socket("localhost", SERVER_PORT);
+            PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("Connected to the server.");
@@ -26,6 +25,7 @@ public class Client {
                 String message = scanner.nextLine(); // read a line from the console
 
                 if ("quit".equals(message)) {
+                    clientSocket.close();
                     break;
                 }
 
